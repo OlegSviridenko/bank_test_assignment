@@ -1,0 +1,22 @@
+<%= turbo_frame_tag 'modal' do %>
+  <div class="modal">
+    <h1 class="modal__title">
+      <%= (decision = @result.fetch(:decision, false)) == true ? 'Approved' : 'Rejected' %>
+    </h1>
+      <% if decision %>
+        <p class="modal__description">
+          The maximum amount we can provide you for the requested period is <strong><%= @result.fetch(:max_possible_amount, 0) %></strong> Euro
+        </p>
+      <% else %>
+        <div class="modal__error">
+          We are unable to provide you loan with requested attributes by following reason
+          <%= @result.fetch(:reason, '') %>
+        </div>
+        <% if max_possible_amount = @result.fetch(:max_possible_amount, false) %>
+          <p>We can provide you <strong> <%= max_possible_amount %> </strong> Euro</p>
+          <p>With duration <strong><%= @result.fetch(:min_period, nil) || params['loan_period'] %></strong> months</p>
+        <% end %>
+      <% end %>
+    <%= button_tag 'Ok', data: { controller: 'modals', action: 'modals#close' }, class: 'modal__button' %>
+  </div>
+<% end %>

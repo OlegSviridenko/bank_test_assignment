@@ -1,0 +1,39 @@
+<div class="container">
+<h1 class="container-header">
+    Test Bank Assignment
+  </h1>
+  <div class="container-body">
+    <p class="container-description">
+      For information about the possibility of lending, please provide the following information.
+
+
+      <ol>
+        1. <strong>Personal code</strong>
+      </ol>
+      <ol>
+        2. <strong>Loan amount</strong>, ranging from <strong><%= DecisionsEngine::MIN_LOAN_AMOUNT %></strong> to <strong><%= DecisionsEngine::MAX_LOAN_AMOUNT %></strong> Euro
+      </ol>
+      <ol>
+        3. <strong>Loan term</strong>, within <strong><%= DecisionsEngine::MIN_LOAN_PERIOD %></strong> to <strong><%= DecisionsEngine::MAX_LOAN_PERIOD %></strong> months
+      </ol>
+    </p>
+
+    <%= form_with url: new_loan_decision_path, data: { turbo_frame: 'modal' }, method: :get do |f| %>
+      <div class="form_item">
+        <%= f.label 'personal_code' %>
+        <%= f.number_field :personal_code, class: 'form__input', required: true %>
+      </div>
+      <div class="form_item">
+        <%= f.label 'loan_amount' %>
+        <%= f.number_field :loan_amount, class: 'form__input', required: true, min: DecisionsEngine::MIN_LOAN_AMOUNT, max: DecisionsEngine::MAX_LOAN_AMOUNT %>
+      </div>
+      <div class="form_item">
+        <%= f.label 'loan_period' %>
+        <%= f.number_field :loan_period, class: 'form__input', required: true, min: DecisionsEngine::MIN_LOAN_PERIOD, max: DecisionsEngine::MAX_LOAN_PERIOD %>
+      </div>
+      <div class="form_item">
+        <%= f.submit 'Calculate', class: 'button'  %>
+      </div>
+    <% end %>
+  </div>
+</div>

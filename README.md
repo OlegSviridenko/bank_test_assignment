@@ -1,4 +1,4 @@
-# Rock Paper Scissors
+# Test Bank Assignment
 
 Ruby version - `3.2.2`
 
@@ -14,6 +14,6 @@ Rails version - `7.1.0.alpha`
 
 `rails s`
 
-You can find game page on root url
+You can find project page on root url
 
 ``localhost:3000/``
